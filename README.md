@@ -41,9 +41,7 @@ used. The handling of URLs with empty versions is defined to link to
 the latest release. URLs with empty `groupId` or `artifactId` fields
 are defined to be in error.
 
-## Implementation Qualified URLs
+## Legal
 
-While unambiguous, the above notation is verbose and not friendly to
-human typists due to URL encoding of fields. It is proposed that
-Clojure's `#'` var notation be coopted as the basis for a URL scheme
-designed to "do the right thing" in the majority of cases.
+This specification is placed in the public domain in the hope that it
+will be implemented and prove of use.
