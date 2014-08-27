@@ -20,7 +20,9 @@ there is no Clojure environment at hand.
 
 The hope is that this document will serve as the basis for a linking
 infrastructure spanning [Grimoire](http://grimoire.arrdem.com),
-[CrossCLJ](crossclj.info), and usable both from Emacs and 
+[CrossCLJ](crossclj.info), and not bound to a single documentation
+target so that other Clojure documentations services can provide
+support as they will.
 
 ## Fully Qualified URLs
 
