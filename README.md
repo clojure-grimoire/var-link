@@ -41,6 +41,45 @@ used. The handling of URLs with empty versions is defined to link to
 the latest release. URLs with empty `groupId` or `artifactId` fields
 are defined to be in error.
 
+### Reference Implementation
+
+```Clojure
+(defn url-encode
+  [string]
+  (some-> string str (java.net.URLEncoder/encode "UTF-8") (.replace "+" "%20")))
+
+(defn var-link [proto group artifact version symbol]
+  {:pre [(#{"var" "var+doc" "var+src"
+            :var :var/doc :var/src}
+          proto)
+
+         (and (string? group)
+              (not (empty? group)))
+
+         (and (string? artifact)
+              (not (empty? artifact)))
+
+         (and (string? version)
+              (not (empty? version)))
+
+         (or (string? symbol)
+            (symbol? symbol))]}
+  (let [proto (if-not (string? proto)
+                ({:var "var" :var/doc "var+doc" :var/src "var+src"} proto))]
+    (str proto "://" (url-encode group)
+                "/"  (url-encode artifact)
+                "/"  (url-encode version)
+                "/"  (url-encode (str symbol)))))
+```
+
+### Examples
+```
+var://org.clojure/clojure//clojure.core%2Fconj
+var://org.clojure/clojure/1.6.0/clojure.core%2Fconj
+var+doc://org.clojure/clojure/1.6.0/clojure.core%2Fconj
+var+src://org.clojure/clojure/1.6.0/clojure.core%2Fconj
+```
+
 ## Legal
 
 This specification is placed in the public domain in the hope that it
