@@ -21,7 +21,7 @@ active REPL or other Clojure instance.
 
 The hope is that this document will serve as the basis for a linking
 infrastructure spanning [Grimoire](http://grimoire.arrdem.com),
-[CrossCLJ](crossclj.info), and not bound to a single documentation
+[CrossClj](http://crossclj.info), and not bound to a single documentation
 target so that other Clojure documentations services and editors can
 provide support as they will.
 
