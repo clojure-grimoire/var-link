@@ -48,6 +48,12 @@ defined to be in error.
 
 ### Examples
 ```
+var:org.clojure/clojure//clojure.core%2Fconj
+var:org.clojure/clojure/1.6.0/clojure.core%2Fconj
+var+doc:org.clojure/clojure//clojure.core%2Fconj
+var+doc:org.clojure/clojure/1.6.0/clojure.core%2Fconj
+var+src:org.clojure/clojure//clojure.core%2Fconj
+var+src:org.clojure/clojure/1.6.0/clojure.core%2Fconj
 var://org.clojure/clojure//clojure.core%2Fconj
 var://org.clojure/clojure/1.6.0/clojure.core%2Fconj
 var+doc://org.clojure/clojure//clojure.core%2Fconj
