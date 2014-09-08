@@ -37,7 +37,7 @@ uniquely identify a class, namespace or var within a given artifact.
 The unofficial Maven standard for URIs seems to be
 
 ```
-mvn:grouopId/artifactId/version/extension/classifer
+mvn:groupId/artifactId/version/extension/classifer
 ```
 
 The path structure of var-link URIs should supserset this higherarchy
