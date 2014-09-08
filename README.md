@@ -27,39 +27,78 @@ provide support as they will.
 
 ## Specification
 
-Three URI types are provided: `var`, `var+doc` and `var+src`. These
-tokens shall be termed `scheme`.
+This spec defines four kinds of links: an artifact URI, a namespace
+URI, a class URI and a "var" URI. Artifact URIs are simply formatted
+Maven artifact identifiers postfixed with enough information to
+uniquely identify a class, namespace or var within a given artifact.
 
-The `var` URI scheme may map either to documentation or a source
+### Prior Art
+
+The unofficial Maven standard for URIs seems to be
+
+```
+mvn:grouopId/artifactId/version/extension/classifer
+```
+
+The path structure of var-link URIs should supserset this higherarchy
+as it already handles uniquely identifying a Maven artifact, which is
+a requirement for identifying artifact versioned entities like vars
+and classes.
+
+The term `$artifact` shall be used to refer to the template string
+`$grouopId/$artifactId/$version/$extension/$classifer`. Note that the
+extension and classifier fields may be empty. If the version field is
+empty, then the intention is to link to the newest (highest versioned)
+release. All other fields in an artifact identifier must be populated.
+
+### Var Links
+
+Three URI types are provided: `var`, `var+doc` and `var+src`. 
+
+The `var` URI scheme set may map either to documentation or a source
 listing as defined by the link handling application. `var+doc` URIs
 must resolve to documentation. `var+src` URIs must resolve to source
 listings.
 
-Var link URIs have a path, being a quads `(groupId, artifactId,
-version, fullyQualifiedSymbol)` formatted as a `/` deliminated list of
-URL encoded parts.
+Var is a pair `artifact` as specified above and a
+`fullyQualifiedSymbol`, being the fully namespace qualified form of a
+Clojure symbol.
 
-This gives the template
-`$scheme:$groupId/$artifactId/$version/$fullyQualifiedSymbol`.
+This gives the template `$scheme:$artifact/$fullyQualifiedSymbol`.
 
-The handling of URIs with empty versions is defined to link to the
-latest release. URIs with empty `groupId` or `artifactId` fields are
-defined to be in error.
-
-### Examples
+#### Examples
 ```
-var:org.clojure/clojure//clojure.core%2Fconj
-var:org.clojure/clojure/1.6.0/clojure.core%2Fconj
-var+doc:org.clojure/clojure//clojure.core%2Fconj
-var+doc:org.clojure/clojure/1.6.0/clojure.core%2Fconj
-var+src:org.clojure/clojure//clojure.core%2Fconj
-var+src:org.clojure/clojure/1.6.0/clojure.core%2Fconj
-var://org.clojure/clojure//clojure.core%2Fconj
-var://org.clojure/clojure/1.6.0/clojure.core%2Fconj
-var+doc://org.clojure/clojure//clojure.core%2Fconj
-var+doc://org.clojure/clojure/1.6.0/clojure.core%2Fconj
-var+src://org.clojure/clojure//clojure.core%2Fconj
-var+src://org.clojure/clojure/1.6.0/clojure.core%2Fconj
+var:org.clojure/clojure/1.6.0///clojure.core%2Fconj
+var+src:org.clojure/clojure/1.6.0///clojure.core%2Fconj
+var+doc:org.clojure/clojure/1.6.0///clojure.core%2Fconj
+var:org.clojure/clojure////clojure.core%2Fconj
+var+doc:org.clojure/clojure////clojure.core%2Fconj
+var+src:org.clojure/clojure////clojure.core%2Fconj
+```
+
+### Namespace & Class Links
+
+The URI types `class`, `class+doc`, `class+src`, `ns`, `ns+doc` and
+`ns+src` must be provided.
+
+These URI types share behavior with their equivalents in the var link
+spec.
+
+#### Examples
+
+```
+ns:org.clojure/clojure/1.6.0///clojure.core
+ns+doc:org.clojure/clojure/1.6.0///clojure.core
+ns+src:org.clojure/clojure/1.6.0///clojure.core
+ns:org.clojure/clojure////clojure.core
+ns+doc:org.clojure/clojure////clojure.core
+ns+src:org.clojure/clojure////clojure.core
+class:org.clojure/clojure/1.6.0///clojure.lang.RT
+class+doc:org.clojure/clojure/1.6.0///clojure.lang.RT
+class+src:org.clojure/clojure/1.6.0///clojure.lang.RT
+class:org.clojure/clojure////clojure.lang.RT
+class+doc:org.clojure/clojure////clojure.lang.RT
+class+src:org.clojure/clojure////clojure.lang.RT
 ```
 
 ## Known implementations
