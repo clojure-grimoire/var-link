@@ -46,7 +46,7 @@ a requirement for identifying artifact versioned entities like vars
 and classes.
 
 The term `$artifact` shall be used to refer to the template string
-`$grouopId/$artifactId/$version/$extension/$classifer`. Note that the
+`$groupId/$artifactId/$version/$extension/$classifer`. Note that the
 extension and classifier fields may be empty. If the version field is
 empty, then the intention is to link to the newest (highest versioned)
 release. All other fields in an artifact identifier must be populated.
